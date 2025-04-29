@@ -1,20 +1,34 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { createNativeStackNavigator, NavigationContainer } from "@react-navigation/native-stack";
+import CharacterScreen from "./src/screens/CharacterScreen";
+import HomeScreen from "./src/screens/HomeScreen";
+import MovieScreen from "./src/screens/MovieScreen";
+import StarshipScreen from "./src/screens/StarshipScreen";
 
-export default function App() {
+
+const Stack = createNativeStackNavigator();
+
+export default function Starwars() {
   return (
-    <View style={styles.container}>
-      <Text>Star Wars</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen 
+        name="Character"
+        component={HomeScreen} />
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+        <Stack.Screen 
+        name="CharacterDetail" 
+        component={CharacterScreen} />
+
+        <Stack.Screen 
+        name="Movie" 
+        component={MovieScreen} />
+
+        <Stack.Screen 
+        name="Starship" 
+        component={StarshipScreen} />
+
+      </Stack.Navigator>
+    </NavigationContainer>   
+  );
+};
