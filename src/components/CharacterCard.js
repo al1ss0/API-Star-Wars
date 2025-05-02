@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, TouchableOpacity, StyleSheet } from "react-native";
+import { TouchableOpacity, Text, StyleSheet, View } from "react-native";
 
 export default function CharacterCard({ character, onPress }) {
   return (
@@ -12,15 +12,17 @@ export default function CharacterCard({ character, onPress }) {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: "black",
-    padding: 15,
-    borderRadius: 100,
-    marginBottom: 20,
+    borderRadius: 25,
+    marginVertical: 6,
+    padding: 16,
+    alignItems: "center",
+    borderColor: "#FFE81F",
+    borderWidth: 2,
   },
   name: {
-    fontSize: 20,
-    color: "#fff",
-    fontWeight: "600",
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "white",
     fontFamily: "monospace",
-    textAlign: "center",
   },
 });

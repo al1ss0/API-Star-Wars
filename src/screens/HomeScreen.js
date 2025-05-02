@@ -10,24 +10,19 @@ export default function HomeScreen({ navigation }) {
   async function fetchCharacters() {
     try {
       setLoading(true);
+      const response1 = await api.get("people/?page=1");
+      const response2 = await api.get("people/?page=2");
 
-      const responsePage1 = await api.get("people/?page=1");
-      const responsePage2 = await api.get("people/?page=2");
-
-      const allCharacters = [
-        ...responsePage1.data.results,
-        ...responsePage2.data.results,
-      ].slice(0, 16);
-
-      setCharacters(allCharacters);
-    } catch (error) {
-      console.error("Erro ao buscar personagens:", error);
+      const all = [...response1.data.results, ...response2.data.results].slice(0, 16);
+      setCharacters(all);
+    } catch (err) {
+      console.log("Erro ao buscar personagens:", err);
     } finally {
       setLoading(false);
     }
   }
 
-  function extractCharacterId(url) {
+  function getIdFromUrl(url) {
     const parts = url.split("/");
     return parts[parts.length - 2];
   }
@@ -39,7 +34,7 @@ export default function HomeScreen({ navigation }) {
   if (loading) {
     return (
       <View style={styles.centered}>
-        <ActivityIndicator size="large" />
+        <ActivityIndicator size="large" color="#FFE81F" />
       </View>
     );
   }
@@ -47,13 +42,13 @@ export default function HomeScreen({ navigation }) {
   return (
     <FlatList
       data={characters}
-      keyExtractor={(item) => item.url}
+      keyExtractor={(item) => item.name}
       renderItem={({ item }) => (
         <CharacterCard
-          character={{ ...item, id: extractCharacterId(item.url) }}
+          character={{ ...item, id: getIdFromUrl(item.url) }}
           onPress={() =>
             navigation.navigate("Detalhes", {
-              character: { ...item, id: extractCharacterId(item.url) },
+              character: { ...item, id: getIdFromUrl(item.url) },
             })
           }
         />
@@ -64,12 +59,11 @@ export default function HomeScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  list: {
-    padding: 12,
-  },
+  list: { padding: 12 },
   centered: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "black",
   },
 });

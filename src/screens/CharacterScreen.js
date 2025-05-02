@@ -1,79 +1,47 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
+import React, { useEffect, useState } from 'react';
+import { View, Text, ActivityIndicator, StyleSheet, Image } from 'react-native';
+import axios from 'axios';
+import { characters } from '../../services/image'; // <-- corrigido aqui
 
-export default function CharacterScreen({ route, navigation }) {
+const CharacterScreen = ({ route }) => {
   const { character } = route.params;
+  const [starships, setStarships] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const handleMoviesPress = () => {
-    alert("Filmes:\n" + character.films?.join("\n"));
-  };
+  useEffect(() => {
+    const fetchStarships = async () => {
+      try {
+        const results = await Promise.all(
+          character.starships.map(url => axios.get(url).then(res => res.data))
+        );
+        setStarships(results);
+      } catch (error) {
+        console.error('Erro ao buscar naves:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const handleStarshipsPress = () => {
-    alert("Naves:\n" + character.starships?.join("\n"));
-  };
+    fetchStarships();
+  }, []);
+
+  if (loading) {
+    return <ActivityIndicator size="large" color="yellow" style={{ flex: 1 }} />;
+  }
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.card}>
-        <Text style={styles.name}>{character.name}</Text>
-        <Text style={styles.text}>Height: {character.height} cm</Text>
-        <Text style={styles.text}>Mass: {character.mass} kg</Text>
-        <Text style={styles.text}>Hair Color: {character.hair_color}</Text>
-        <Text style={styles.text}>Eyes Color: {character.eye_color}</Text>
-        <Text style={styles.text}>Birth Year: {character.birth_year}</Text>
-
-        <TouchableOpacity style={styles.button} onPress={handleMoviesPress}>
-          <Text style={styles.buttonText}>Movies</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.button} onPress={handleStarshipsPress}>
-          <Text style={styles.buttonText}>Starships</Text>
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
+    <View style={styles.container}>
+      <Text style={styles.title}>{character.name}</Text>
+      <Image source={{ uri: character.image }} style={styles.image} />
+      {/* render starships here... */}
+    </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    backgroundColor: "white",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
-  },
-  card: {
-    backgroundColor: "#111",
-    borderRadius: 30,
-    padding: 20,
-    alignItems: "center",
-    justifyContent: "center",
-    width: "90%",
-    maxWidth: 400,
-    marginVertical: 20,
-  },
-  name: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "#fff",
-    marginBottom: 10,
-  },
-  text: {
-    fontSize: 18,
-    color: "#ccc",
-    marginVertical: 2,
-  },
-  button: {
-    backgroundColor: "grey",
-    borderRadius: 8,
-    padding: 10,
-    marginTop: 10,
-    width: "100%",
-    alignItems: "center",
-  },
-  buttonText: {
-    color: "yellow",
-    fontSize: 20,
-    fontWeight: "bold",
-  },
+  container: { flex: 1, padding: 20 },
+  title: { fontSize: 24, fontWeight: 'bold' },
+  image: { width: 200, height: 200, marginVertical: 20 },
 });
+
+export default CharacterScreen;
