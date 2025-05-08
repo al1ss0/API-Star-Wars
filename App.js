@@ -1,55 +1,27 @@
-import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import HomeScreen from "./src/screens/HomeScreen";
-import CharacterScreen from "./src/screens/CharacterScreen";
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
+import Home from './pages/Home';
+import Personagem from './pages/Personagem';
+import Filmes from './pages/Filmes';
+import Naves from './pages/Naves';
+import Sobre from './pages/Sobre';
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
-export default function Starwars() {
+export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-
-        <Stack.Screen 
-        name="Home"
-        options={{
-          headerTitle: "Star Wars",
-          headerStyle: {
-            backgroundColor: "#000000",
-          },
-          headerTitleAlign: "center",
-          headerTintColor: "#FFE81F",
-          headerTitleStyle: {
-            fontWeight: "bold",
-            fontSize: 30,
-            fontFamily: 'monospace',
-          },
-        }}
-        component={HomeScreen} 
-        />
-
-        <Stack.Screen 
-        name="Detalhes"
-        options={{
-          headerTitle: "Personagem",
-          headerStyle: {
-            backgroundColor: "#000000",
-          },
-          headerTitleAlign: "center",
-          headerTintColor: "#FFE81F",
-          headerTitleStyle: {
-            fontWeight: "bold",
-            fontSize: 30,
-            fontFamily: 'monospace',
-          },
-        }}
-        component={CharacterScreen} 
-        />
-        
-
+      <Stack.Navigator
+        screenOptions={{ headerShown: false }}
+      >
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Personagem" component={Personagem} />
+        <Stack.Screen name="Filmes" component={Filmes} />
+        <Stack.Screen name="Naves" component={Naves} />
+        <Stack.Screen name="Sobre" component={Sobre} />
       </Stack.Navigator>
-    </NavigationContainer>   
+    </NavigationContainer>
   );
-};
+}
