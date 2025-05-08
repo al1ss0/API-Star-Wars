@@ -6,11 +6,11 @@ import { useNavigation } from '@react-navigation/native';
 import { Audio } from 'expo-av';
 
 const personagens = [
-  { nome: 'Luke Skywalker', imagem: require('../assets/imagens/luke.png'), id: 1 },
-  { nome: 'Darth Vader', imagem: require('../assets/imagens/darth.png'), id: 4 },
-  { nome: 'Hansolo', imagem: require('../assets/imagens/Hansolo.png'), id: 14 },
-  { nome: 'Yoda', imagem: require('../assets/imagens/yoda.png'), id: 20 },
-  { nome: 'Chewbacca', imagem: require('../assets/imagens/chewbacca.png'), id: 13 },
+  { id: 1, nome: 'Luke Skywalker', imagem: require('../../assets/imagens/luke.png') },
+  { id: 4, nome: 'Darth Vader', imagem: require('../../assets/imagens/darth.png') },
+  { id: 14, nome: 'Han Solo', imagem: require('../../assets/imagens/Hansolo.png') },
+  { id: 20, nome: 'Yoda', imagem: require('../../assets/imagens/yoda.png') },
+  { id: 13, nome: 'Chewbacca', imagem: require('../../assets/imagens/chewbacca.png') },
 ];
 
 export default function Home() {

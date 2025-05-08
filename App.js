@@ -2,11 +2,11 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Home from './pages/Home';
-import Personagem from './pages/Personagem';
-import Filmes from './pages/Filmes';
-import Naves from './pages/Naves';
-import Sobre from './pages/Sobre';
+import Home from './src/pages/Home';
+import Personagem from './src/pages/Personagem';
+import Filmes from './src/pages/Filmes';
+import Naves from './src/pages/Naves';
+import Sobre from './src/pages/Sobre';
 
 const Stack = createStackNavigator();
 

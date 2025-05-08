@@ -5,11 +5,11 @@ import api from '../services/api';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 const imagensPersonagens = {
-  1: require('../assets/imagens/luke.png'),
-  4: require('../assets/imagens/darth.png'),
-  14: require('../assets/imagens/Hansolo.png'),
-  20: require('../assets/imagens/yoda.png'),
-  13: require('../assets/imagens/chewbacca.png'),
+  1: require('../../assets/imagens/luke.png'),
+  4: require('../../assets/imagens/darth.png'),
+  14: require('../../assets/imagens/Hansolo.png'),
+  20: require('../../assets/imagens/yoda.png'),
+  13: require('../../assets/imagens/chewbacca.png'),
 };
 
 export default function Personagem() {
